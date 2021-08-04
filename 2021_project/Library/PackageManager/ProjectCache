@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637636646242120010
-    m_Hash: 3186588314
+      ticks: 637636665715751680
+    m_Hash: 4213856682
   m_LockFileStatus:
     m_FilePath: E:/GitHub/2021_project/2021_project/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637636646242120010
-    m_Hash: 3932292278
+      ticks: 637636665715761608
+    m_Hash: 1242768795
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -233,12 +233,12 @@ m_PackageAssets:
         url: https://github.cds.internal.unity3d.com/unity/com.unity.ide.rider.git
         revision: abb44f053e9a41d2e00e149e32a19bcec76e98b4
         path: 
-    - packageId: com.unity.ide.visualstudio@2.0.11
+    - packageId: com.unity.ide.visualstudio@2.0.9
       testable: 0
       isDirectDependency: 1
-      version: 2.0.11
+      version: 2.0.9
       source: 1
-      resolvedPath: E:\GitHub\2021_project\2021_project\Library\PackageCache\com.unity.ide.visualstudio@2.0.11
+      resolvedPath: E:\GitHub\2021_project\2021_project\Library\PackageCache\com.unity.ide.visualstudio@2.0.9
       assetPath: Packages/com.unity.ide.visualstudio
       name: com.unity.ide.visualstudio
       displayName: Visual Studio Editor
@@ -312,13 +312,13 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637613656180000000
+      datePublishedTicks: 637580705480000000
       documentationUrl: 
       hasRepository: 1
       repository:
         type: git
         url: https://github.cds.internal.unity3d.com/unity/com.unity.ide.visualstudio.git
-        revision: 680e06d94ffca728223ae2cb14bb919cd354e2c1
+        revision: c7cd4c6319806423b3d918b3e9599244e3993d41
         path: 
     - packageId: com.unity.ide.vscode@1.2.3
       testable: 0

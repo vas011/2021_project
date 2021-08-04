@@ -7,7 +7,7 @@ public class player : MonoBehaviour
 
     Animator player_Animator;
 
-
+    
     public int player_hp;
     public int player_speed;
 
@@ -16,23 +16,23 @@ public class player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player_move = false;
         player_Animator = GetComponent<Animator>();
     }
     void move()
     {
-        player_move = true;
         Vector3 move_dir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         if (move_dir.x == 0 && move_dir.z == 0)
         {
             player_move = false;
-            player_Animator.SetTrigger("Idle");
-
+            player_Animator.SetFloat("speed" , 0f);
         }
-        else if(move_dir.x != 0 || move_dir.z != 0)
+        if (move_dir.x != 0 || move_dir.z != 0)
         {
-            player_Animator.SetTrigger("Run");
-            transform.position += move_dir * player_speed * Time.deltaTime;
+            player_move = true;
+            player_Animator.SetFloat("speed", 2f);
         }
+        transform.position += move_dir * player_speed * Time.deltaTime;
     }
 
     // Update is called once per frame
