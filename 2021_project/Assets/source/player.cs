@@ -6,8 +6,8 @@ public class player : MonoBehaviour
 {
 
     Animator player_Animator;
+    Player_Camera camera;
 
-    
     public int player_hp;
     public int player_speed;
 
@@ -32,6 +32,7 @@ public class player : MonoBehaviour
             player_move = true;
             player_Animator.SetFloat("speed", 2f);
         }
+        transform.forward += move_dir;
         transform.position += move_dir * player_speed * Time.deltaTime;
     }
 
