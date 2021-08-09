@@ -493,3 +493,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1070012840}
+  speed: 5
