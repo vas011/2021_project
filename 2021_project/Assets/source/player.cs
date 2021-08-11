@@ -6,7 +6,6 @@ public class player : MonoBehaviour
 {
 
     Animator player_Animator;
-    Player_Camera camera;
 
     public int player_hp;
     public int player_speed;
