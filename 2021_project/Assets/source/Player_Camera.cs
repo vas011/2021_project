@@ -13,7 +13,7 @@ public class Player_Camera : MonoBehaviour
 
 
     /* 기능 중지
-     * 사용할지 안할지 추후 설정
+     * 사용할지 안할지 추후 설정*/
      
     //카메라 움직임 함수
     void camera_move()
@@ -23,7 +23,7 @@ public class Player_Camera : MonoBehaviour
         //마우스 이동값 저장;;
         datamouseX += save_mouseX;
         //카메라 x축 이동 제한 코드 적용
-        datamouseX = Mathf.Clamp(datamouseX, -50, 50);
+        datamouseX = Mathf.Clamp(datamouseX, -90, 90);
         //마우스 이동으로 인한 카메라 시점 이동 코드 적용
         transform.eulerAngles = new Vector3(30, datamouseX, 0);
 
@@ -44,6 +44,7 @@ public class Player_Camera : MonoBehaviour
 
         //카메라 위치 설정 (위치 고정형)
         transform.position = player.transform.localPosition + new Vector3(0, 5, -5);
+        camera_move();
         //rotation 설정을 Quaternion.Euler() 함수를 통하여 Vector3 x,y,z 축 값을 사용
         //transform.rotation = Quaternion.Euler(30,player.transform.rotation.eulerAngles.y,0);
 

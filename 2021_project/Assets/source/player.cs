@@ -6,6 +6,7 @@ public class player : MonoBehaviour
 {
 
     Animator player_Animator;
+    Rigidbody playerrigidbody;
 
     public int player_hp;
     public int player_speed;
