@@ -18,8 +18,12 @@ public class Monster : MonoBehaviour
         {
             count = 0;
         }
-        navi_Agent.SetDestination(move_point[count].position);
-        count++;
+        if(navi_Agent.velocity == Vector3.zero)
+        {
+            navi_Agent.SetDestination(move_point[count].position);
+            count++;
+        }
+        
         Debug.Log(count.ToString());
     }
 
@@ -27,11 +31,12 @@ public class Monster : MonoBehaviour
     void Start()
     {
         navi_Agent = GetComponent<NavMeshAgent>();
+        InvokeRepeating("monster_move" , 0f,2f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        StartCoroutine("monster_move", 3f);
+
     }
 }
