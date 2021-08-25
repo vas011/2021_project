@@ -224,7 +224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100050, guid: 2a9e42bd67ad1124780104874629b833, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 100052, guid: 2a9e42bd67ad1124780104874629b833, type: 3}
       propertyPath: m_Layer
@@ -954,8 +954,8 @@ MonoBehaviour:
   player_Layermak:
     serializedVersion: 2
     m_Bits: 64
-  angle: 30
-  distancec: 8
+  angle: 80
+  distancec: 10
   move_point:
   - {fileID: 1083900877}
   - {fileID: 852608179}

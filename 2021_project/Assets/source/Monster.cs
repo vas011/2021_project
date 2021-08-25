@@ -28,7 +28,7 @@ public class Monster : MonoBehaviour
     //플레이어 찾았음을 저장하는 변수
     bool fiend_player;
 
-
+    //몬스터 웨이포인트 이동 함수
     void monster_move()
     {
         if (count >= move_point.Length)
@@ -41,33 +41,49 @@ public class Monster : MonoBehaviour
             monster_Ani.SetBool("Run", true);
             count++;
         }
-        if(navi_Agent.velocity != Vector3.zero)
+        if (navi_Agent.velocity != Vector3.zero)
         {
             monster_Ani.SetBool("Run", false);
         }
 
     }
 
+    //플레이어 찾기를 위한 함수
     void field_player()
     {
         Collider[] colls = Physics.OverlapSphere(transform.position, distancec, player_Layermak);
 
-        if(colls.Length > 0)
+        if (colls.Length > 0)
         {
-            fiend_player = true;
-            Debug.Log("플레이어 찾음!");
+            Transform target_player = colls[0].transform;
+            Vector3 traget_direction = (target_player.position - transform.position).normalized;
+            float target_angle = Vector3.Angle(traget_direction , transform.forward);
+            if(target_angle < angle * 0.5)
+            {
+                if (Physics.Raycast(transform.position , traget_direction, out RaycastHit hit , distancec))
+                {
+                    if(hit.transform.name == "player")
+                    {
+                        Debug.Log("플레이어 찾음!");
+                    }
+                }
+            }    
         }
 
         //눈에 보이게 광선의 방향 및 길이 그리기
-        Debug.DrawRay(transform.position , transform.TransformDirection(Vector3.forward)* distancec,Color.red);
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * distancec, Color.red);
+    }
+
+    private void Awake()
+    {
+        navi_Agent = GetComponent<NavMeshAgent>();
+        monster_Ani = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        navi_Agent = GetComponent<NavMeshAgent>();
-        monster_Ani = GetComponent<Animator>();
-        InvokeRepeating("monster_move" , 2f,5f);
+        InvokeRepeating("monster_move", 2f, 5f);
     }
 
     // Update is called once per frame
