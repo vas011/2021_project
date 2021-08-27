@@ -61,13 +61,18 @@ public class Monster : MonoBehaviour
             if(target_angle < angle * 0.5)
             {
                 if (Physics.Raycast(transform.position , traget_direction, out RaycastHit hit , distancec))
-                {
-                    if(hit.transform.name == "player")
+                {                      
+                    if (hit.transform.name == "Player")
                     {
-                        Debug.Log("플레이어 찾음!");
+                        fiend_player = true;
+                    }
+                    else
+                    {
+                        fiend_player = false;
                     }
                 }
-            }    
+                Debug.Log(fiend_player.ToString());
+            }
         }
 
         //눈에 보이게 광선의 방향 및 길이 그리기
