@@ -951,16 +951,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2591fadc1e94dfe4381abcd2358d1fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 100
+  attack_speed: 3
+  attack_range: 1.5
   player_Layermak:
     serializedVersion: 2
     m_Bits: 64
-  angle: 80
+  angle: 120
   distancec: 10
   move_point:
   - {fileID: 1083900877}
   - {fileID: 852608179}
   - {fileID: 603782446}
   - {fileID: 1153576929}
+--- !u!136 &814833565
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814833560}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &852608178
 GameObject:
   m_ObjectHideFlags: 0

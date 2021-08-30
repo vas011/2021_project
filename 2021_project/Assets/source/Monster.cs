@@ -7,7 +7,14 @@ public class Monster : MonoBehaviour
 {
     NavMeshAgent navi_Agent;
     Animator monster_Ani;
-
+    Transform Ptarget;
+    //몬스터 스탯
+    [Header("Stats")]
+    public float hp;
+    public float attack_speed;
+    public float attack_range;
+    [Space(10f)]
+    
     //레이마스크 설정 변수
     [SerializeField]
     LayerMask player_Layermak = 0;
@@ -18,7 +25,7 @@ public class Monster : MonoBehaviour
     [SerializeField]
     float distancec;
 
-
+    [Header("way_point")]
     //웨이포인트 배열 변수
     [SerializeField]
     Transform[] move_point;
@@ -27,7 +34,9 @@ public class Monster : MonoBehaviour
     int count = 0;
     //플레이어 찾았음을 저장하는 변수
     bool fiend_player;
-
+    //콜라이더 변수
+    float monster_collider;
+    float player_collider;
     //몬스터 웨이포인트 이동 함수
     void monster_move()
     {
@@ -65,10 +74,12 @@ public class Monster : MonoBehaviour
                     if (hit.transform.name == "Player")
                     {
                         fiend_player = true;
+                        CancelInvoke("monster_move");
                     }
                     else
                     {
                         fiend_player = false;
+                        InvokeRepeating("monster_move", 2f, 5f);
                     }
                 }
                 Debug.Log(fiend_player.ToString());
@@ -78,6 +89,16 @@ public class Monster : MonoBehaviour
         //눈에 보이게 광선의 방향 및 길이 그리기
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * distancec, Color.red);
     }
+    void player_Attack()
+    {
+        if (fiend_player == true)
+        {
+            Vector3 dirToTarget = (Ptarget.position - transform.position).normalized;
+            Vector3 targetPosition = Ptarget.position - dirToTarget * (monster_collider + player_collider + attack_range / 2f);
+            navi_Agent.destination = targetPosition;
+        }
+    }
+
 
     private void Awake()
     {
@@ -88,6 +109,9 @@ public class Monster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Ptarget = GameObject.FindGameObjectWithTag("Player").transform;
+        monster_collider = GetComponent<CapsuleCollider>().radius;
+        player_collider = Ptarget.GetComponent<CapsuleCollider>().radius;
         InvokeRepeating("monster_move", 2f, 5f);
     }
 
@@ -95,5 +119,6 @@ public class Monster : MonoBehaviour
     void Update()
     {
         field_player();
+        player_Attack();
     }
 }
