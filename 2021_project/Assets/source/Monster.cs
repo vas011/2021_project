@@ -8,13 +8,14 @@ public class Monster : MonoBehaviour
     NavMeshAgent navi_Agent;
     Animator monster_Ani;
     Transform Ptarget;
+    player player_info;
     //몬스터 스탯
     [Header("Stats")]
     public float hp;
     public float attack_speed;
     public float attack_range;
     [Space(10f)]
-    
+
     //레이마스크 설정 변수
     [SerializeField]
     LayerMask player_Layermak = 0;
@@ -66,15 +67,16 @@ public class Monster : MonoBehaviour
         {
             Transform target_player = colls[0].transform;
             Vector3 traget_direction = (target_player.position - transform.position).normalized;
-            float target_angle = Vector3.Angle(traget_direction , transform.forward);
-            if(target_angle < angle * 0.5)
+            float target_angle = Vector3.Angle(traget_direction, transform.forward);
+            if (target_angle < angle * 0.5)
             {
-                if (Physics.Raycast(transform.position , traget_direction, out RaycastHit hit , distancec))
-                {                      
+                if (Physics.Raycast(transform.position, traget_direction, out RaycastHit hit, distancec))
+                {
                     if (hit.transform.name == "Player")
                     {
                         fiend_player = true;
                         CancelInvoke("monster_move");
+                        player_Attack();
                     }
                     else
                     {
@@ -91,14 +93,28 @@ public class Monster : MonoBehaviour
     }
     void player_Attack()
     {
+        Vector3 dirToTarget = (Ptarget.position - transform.position).normalized;
+        Vector3 targetPosition = Ptarget.position - dirToTarget * (monster_collider + player_collider + attack_range / 2f);
         if (fiend_player == true)
         {
-            Vector3 dirToTarget = (Ptarget.position - transform.position).normalized;
-            Vector3 targetPosition = Ptarget.position - dirToTarget * (monster_collider + player_collider + attack_range / 2f);
             navi_Agent.destination = targetPosition;
         }
+        if (navi_Agent.destination == targetPosition)
+        {
+            monster_Ani.SetBool("Run" , false);
+            monster_Ani.SetBool("Attack01", true);
+            Attack_Action();
+        }
+        else if(navi_Agent.destination != targetPosition)
+        {
+            monster_Ani.SetBool("Attack01", false);
+            monster_Ani.SetBool("Run", true);
+        }
     }
+    void Attack_Action()
+    {
 
+    }
 
     private void Awake()
     {
@@ -113,12 +129,12 @@ public class Monster : MonoBehaviour
         monster_collider = GetComponent<CapsuleCollider>().radius;
         player_collider = Ptarget.GetComponent<CapsuleCollider>().radius;
         InvokeRepeating("monster_move", 2f, 5f);
+        player_info = GetComponent<player>();
     }
 
     // Update is called once per frame
     void Update()
     {
         field_player();
-        player_Attack();
     }
 }
