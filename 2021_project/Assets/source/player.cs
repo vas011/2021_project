@@ -6,7 +6,9 @@ public class player : MonoBehaviour
 {
 
     Animator player_Animator;
-    Rigidbody playerrigidbody;
+    [SerializeField]
+    Transform player_body;
+
 
     public int player_hp;
     public int player_speed;
@@ -25,14 +27,14 @@ public class player : MonoBehaviour
         if (move_dir.x == 0 && move_dir.z == 0)
         {
             player_move = false;
-            player_Animator.SetFloat("speed" , 0f);
+            player_Animator.SetFloat("speed", 0f);
         }
         if (move_dir.x != 0 || move_dir.z != 0)
         {
             player_move = true;
             player_Animator.SetFloat("speed", 2f);
         }
-        transform.forward += move_dir;
+        //transform.forward += move_dir;
         transform.position += move_dir * player_speed * Time.deltaTime;
     }
 
