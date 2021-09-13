@@ -84,7 +84,7 @@ public class Monster : MonoBehaviour
                         InvokeRepeating("monster_move", 2f, 5f);
                     }
                 }
-                Debug.Log(fiend_player.ToString());
+                //Debug.Log(fiend_player.ToString());
             }
         }
 

@@ -774,7 +774,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e453cc35c27ecf4a8b18f507f839ac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_body: {fileID: 0}
+  player_body: {fileID: 1912728245}
+  camer_arm: {fileID: 462695964}
   player_hp: 100
   player_speed: 10
 --- !u!4 &1070012843 stripped
@@ -971,6 +972,11 @@ MonoBehaviour:
   player: {fileID: 1070012843}
   camera_Arm: {fileID: 462695964}
   speed: 5
+--- !u!4 &1912728245 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400210, guid: 2a9e42bd67ad1124780104874629b833, type: 3}
+  m_PrefabInstance: {fileID: 8176283}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &136458900200375944
 PrefabInstance:
   m_ObjectHideFlags: 0
