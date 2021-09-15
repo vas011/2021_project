@@ -26,11 +26,10 @@ public class player : MonoBehaviour
         player_move = false;
         player_Attack = false;
         player_Animator = GetComponent<Animator>();
-        InvokeRepeating("Attack", 2f, 5f);
+        InvokeRepeating("Attack", 10f, 2f);
     }
     void move()
     {
-
         Vector3 move_dir = Vector3.zero;
         move_dir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         Vector3 P_move = transform.forward = camer_arm.forward;
@@ -80,28 +79,48 @@ public class player : MonoBehaviour
     void Attack()
     {
         Attack_time += Time.deltaTime;
-        if(Attack_time >3.0f)
-        {
-           // Attack_time = 0;
-            Debug.Log(Attack_time.ToString());
-            player_Animator.SetBool("Attack1", false);
-        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            if (Attack_time > 1.5f)
+            {
+                Attack_time = 0;
+                count = 0;
+                //Debug.Log(Attack_time.ToString());
+                player_Attack = false;
+            }
+
+            count++;
             player_move = false;
             player_Attack = true;
+            switch (count)
+            {
+                case 1:
+                    player_Animator.SetTrigger("Attack1");
+                    break;
 
-            player_Animator.SetBool("Attack1", true);
-            count++;
-            Debug.Log("공격 버튼 확인!!");
+                case 2:
+                    if (player_Attack == true)
+                    {
+                        player_Animator.SetTrigger("Attack2");
+                    }
+                    break;
+                default:
+                    count = 0;
+                    player_Attack = false;
+                    break;
+            }
+
+            Debug.Log(count.ToString());
         }
-
-        player_Attack = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (player_Attack != false)
+        {
+            player_Attack = false;
+        }
         move();
         Attack();
     }
