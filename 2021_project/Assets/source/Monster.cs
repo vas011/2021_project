@@ -39,6 +39,7 @@ public class Monster : MonoBehaviour
     float monster_collider;
     float player_collider;
     //몬스터 웨이포인트 이동 함수
+
     void monster_move()
     {
         if (count >= move_point.Length)
@@ -84,7 +85,6 @@ public class Monster : MonoBehaviour
                         InvokeRepeating("monster_move", 2f, 5f);
                     }
                 }
-                //Debug.Log(fiend_player.ToString());
             }
         }
 
@@ -99,7 +99,7 @@ public class Monster : MonoBehaviour
         {
             navi_Agent.destination = targetPosition;
         }
-        if (navi_Agent.destination == targetPosition)
+        if (navi_Agent.destination == targetPosition || fiend_player)
         {
             monster_Ani.SetBool("Run" , false);
             monster_Ani.SetBool("Attack01", true);

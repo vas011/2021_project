@@ -39,7 +39,7 @@ public class player : MonoBehaviour
             player_Animator.SetFloat("speed", 0f);
         }
         //»óÇÏ
-        else if (move_dir.x == 0f && move_dir.z != 0)
+        else if (move_dir.x == 0f && move_dir.z != 0 )
         {
             player_move = true;
             player_Animator.SetFloat("speed", 2f);
@@ -54,7 +54,7 @@ public class player : MonoBehaviour
                 Debug.Log("»ó " + "z : " + move_dir.z.ToString());
                 transform.position += P_move * player_speed * Time.deltaTime;
             }
-            //Debug.Log(move_dir.z.ToString());
+            Debug.Log(player_Attack.ToString());
         }
         //ÁÂ¿ì
         else
@@ -79,37 +79,38 @@ public class player : MonoBehaviour
     void Attack()
     {
         Attack_time += Time.deltaTime;
+        if (Attack_time > 1.5f)
+        {
+            Attack_time = 0;
+            count = 0;
+            //Debug.Log(Attack_time.ToString());
+            player_Attack = false;
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (Attack_time > 1.5f)
-            {
-                Attack_time = 0;
-                count = 0;
-                //Debug.Log(Attack_time.ToString());
-                player_Attack = false;
-            }
-
-            count++;
-            player_move = false;
             player_Attack = true;
-            switch (count)
+            count++;
+            
+            if (player_Attack)
             {
-                case 1:
-                    player_Animator.SetTrigger("Attack1");
-                    break;
+                switch (count)
+                {
+                    case 1:
+                        player_Animator.SetTrigger("Attack1");
+                        break;
 
-                case 2:
-                    if (player_Attack == true)
-                    {
-                        player_Animator.SetTrigger("Attack2");
-                    }
-                    break;
-                default:
-                    count = 0;
-                    player_Attack = false;
-                    break;
+                    case 2:
+                        if (player_Attack == true)
+                        {
+                            player_Animator.SetTrigger("Attack2");
+                        }
+                        break;
+                    default:
+                        count = 0;
+                        player_Attack = false;
+                        break;
+                }
             }
-
             Debug.Log(count.ToString());
         }
     }
