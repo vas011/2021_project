@@ -103,7 +103,6 @@ public class Monster : MonoBehaviour
         {
             monster_Ani.SetBool("Run" , false);
             monster_Ani.SetBool("Attack01", true);
-            Attack_Action();
         }
         else if(navi_Agent.destination != targetPosition)
         {
@@ -111,9 +110,11 @@ public class Monster : MonoBehaviour
             monster_Ani.SetBool("Run", true);
         }
     }
+    
+    //공격 이벤트 발생 함수
     void Attack_Action()
     {
-
+        Debug.Log("공격이벤트 발생!!");
     }
 
     private void Awake()
