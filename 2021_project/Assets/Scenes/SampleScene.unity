@@ -615,6 +615,19 @@ MonoBehaviour:
   - {fileID: 7014271102779439319}
   - {fileID: 3101188318749656154}
   - {fileID: 136458900200375945}
+  finish:
+  - {fileID: 2817889331639410870}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  waypoints:
+  - waypoint:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
 --- !u!1001 &814833559
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1169,6 +1182,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map
       objectReference: {fileID: 0}
+    - target: {fileID: 2817889330383543348, guid: 1f39e155ebee528488b6b28c006d4cff, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2817889330383543349, guid: 1f39e155ebee528488b6b28c006d4cff, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1218,6 +1235,11 @@ PrefabInstance:
 --- !u!1 &2817889331639410869 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2817889330383543348, guid: 1f39e155ebee528488b6b28c006d4cff, type: 3}
+  m_PrefabInstance: {fileID: 2817889331639410868}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2817889331639410870 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2346098757434632346, guid: 1f39e155ebee528488b6b28c006d4cff, type: 3}
   m_PrefabInstance: {fileID: 2817889331639410868}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3101188318749656153

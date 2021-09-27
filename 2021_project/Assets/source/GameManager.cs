@@ -6,6 +6,11 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     GameObject[] map;
+    [SerializeField]
+    BoxCollider[] finish;
+    [SerializeField]
+    monster_waypoint[] waypoints;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,5 +21,15 @@ public class GameManager : MonoBehaviour
     {
 
     }
+
+    [System.Serializable]
+    class monster_waypoint
+    {
+        [SerializeField]
+        Transform[] waypoint;
+    }
+
 }
+
+
 
