@@ -11,7 +11,6 @@ public class player : MonoBehaviour
     [SerializeField]
     Transform camer_arm;
 
-
     public int player_hp;
     public int player_speed;
 
@@ -115,7 +114,12 @@ public class player : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Map_1")
+        {
+        }
+    }
     void Update()
     {
         if (player_Attack != false)

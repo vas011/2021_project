@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class finish : MonoBehaviour
+public class finish : MonoBehaviour 
 {
     GameObject player;
     GameManager gameManager;
     private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject == player)
+    { 
+        if(other.gameObject.tag == "Player")
         {
             gameManager.box_finish = true;
         }

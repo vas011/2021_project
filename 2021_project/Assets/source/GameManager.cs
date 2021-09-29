@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    //맵 정보 와 몬스터 웨이 포인트를 관리하기 편하게 구조체 코드 설계
     [SerializeField]
     GameObject[] map;
     /*
@@ -13,21 +14,24 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     monster_waypoint[] waypoints;
 
+
+    int map_count = 0;
     public bool box_finish;
-    
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.name);
+    }
+
     void Start()
     {
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(box_finish.ToString());
-        if(box_finish)
-        {
-            Debug.Log("도착!");
-        }
+
     }
 
     [System.Serializable]
@@ -36,8 +40,4 @@ public class GameManager : MonoBehaviour
         [SerializeField]
         Transform[] waypoint;
     }
-
 }
-
-
-
