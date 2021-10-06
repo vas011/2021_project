@@ -4,28 +4,20 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    //맵 정보 와 몬스터 웨이 포인트를 관리하기 편하게 구조체 코드 설계
-    [SerializeField]
-    GameObject[] map;
     /*
     [SerializeField]
     BoxCollider[] finish;
     /**/
     [SerializeField]
-    monster_waypoint[] waypoints;
+    info[] gameManager_info;
 
-
-    int map_count = 0;
     public bool box_finish;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other.gameObject.name);
-    }
+    int map_count = 0;
 
     void Start()
     {
-
+        box_finish = false; 
     }
 
     // Update is called once per frame
@@ -35,9 +27,14 @@ public class GameManager : MonoBehaviour
     }
 
     [System.Serializable]
-    class monster_waypoint
+    class info
     {
+        //맵 정보 와 몬스터 웨이 포인트를 관리하기 편하게 구조체 코드 설계
+        [SerializeField]
+        GameObject map;
         [SerializeField]
         Transform[] waypoint;
+        [SerializeField]
+        Collider finish_collider;
     }
 }

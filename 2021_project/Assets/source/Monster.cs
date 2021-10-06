@@ -121,6 +121,7 @@ public class Monster : MonoBehaviour
     {
         navi_Agent = GetComponent<NavMeshAgent>();
         monster_Ani = GetComponent<Animator>();
+
     }
 
     // Start is called before the first frame update
@@ -128,7 +129,7 @@ public class Monster : MonoBehaviour
     {
         Ptarget = GameObject.FindGameObjectWithTag("Player").transform;
         monster_collider = GetComponent<CapsuleCollider>().radius;
-        player_collider = Ptarget.GetComponent<CapsuleCollider>().radius;
+        player_collider = Ptarget.GetComponent<CapsuleCollider>().radius;   
         InvokeRepeating("monster_move", 2f, 5f);
         player_info = GetComponent<player>();
     }

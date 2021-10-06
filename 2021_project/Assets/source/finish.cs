@@ -2,29 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class finish : MonoBehaviour 
+public class finish : MonoBehaviour
 {
-    GameObject player;
-    GameManager gameManager;
+    public GameManager gameManager;
+    bool player_finish;
+
+
     private void OnTriggerEnter(Collider other)
-    { 
+    {
         if(other.gameObject.tag == "Player")
         {
-            gameManager.box_finish = true;
+            player_finish = true;
         }
-    }
-
-    private void Awake()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
     }
     void Start()
     {
-        gameManager = GetComponent<GameManager>();
+        player_finish = false;
     }
-
     // Update is called once per frame
     void Update()
     {
+        if(player_finish)
+        {
+            gameManager.box_finish = true;
+        }
     }
 }
