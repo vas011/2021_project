@@ -114,12 +114,6 @@ public class player : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Map_1")
-        {
-        }
-    }
     void Update()
     {
         if (player_Attack != false)
