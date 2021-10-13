@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     BoxCollider[] finish;
     /**/
-    public player player;
+    [SerializeField]
+    player player;
     public bool box_finish;
 
     [SerializeField]
@@ -34,8 +35,12 @@ public class GameManager : MonoBehaviour
             maps = gameManager_info[map_count];
             maps.map_setAtive(true);
             player.transform.position = maps.re_start_position.position;
-            player.transform.rotation = new Quaternion(0,180,0,0);
-        }
+            player.transform.rotation = Quaternion.Euler(0, -270, 0);
+            if(map_count <= 5)
+            {
+                map_count = 0;
+            }
+        }   
         box_finish = false;
     }
 

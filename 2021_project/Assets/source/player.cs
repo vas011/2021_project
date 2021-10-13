@@ -9,7 +9,9 @@ public class player : MonoBehaviour
     [SerializeField]
     Transform player_body;
     [SerializeField]
-    Transform camer_arm;
+    public Transform camer_arm;
+
+    GameManager gameManager;
 
     public int player_hp;
     public int player_speed;
@@ -38,7 +40,7 @@ public class player : MonoBehaviour
             player_Animator.SetFloat("speed", 0f);
         }
         //ªÛ«œ
-        else if (move_dir.x == 0f && move_dir.z != 0 )
+        else if (move_dir.x == 0f && move_dir.z != 0)
         {
             player_move = true;
             player_Animator.SetFloat("speed", 2f);
