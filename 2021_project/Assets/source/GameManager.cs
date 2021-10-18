@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     player player;
     public bool box_finish;
+    [SerializeField]
+    Player_Camera player_Camera;
 
     [SerializeField]
     info[] gameManager_info;
@@ -28,20 +30,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (box_finish)
         {
             maps.map_setAtive(false);
             map_count++;
-            maps = gameManager_info[map_count];
-            maps.map_setAtive(true);
-            player.transform.position = maps.re_start_position.position;
-            player.transform.rotation = Quaternion.Euler(0, -270, 0);
-            if(map_count <= 5)
+            if (map_count > 5)
             {
                 map_count = 0;
             }
+            maps = gameManager_info[map_count];
+            maps.map_setAtive(true);
+            player.transform.position = maps.re_start_position.position;
+            box_finish = false;
         }   
-        box_finish = false;
     }
 
     [System.Serializable]

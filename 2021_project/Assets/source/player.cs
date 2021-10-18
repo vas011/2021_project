@@ -46,16 +46,15 @@ public class player : MonoBehaviour
             player_Animator.SetFloat("speed", 2f);
             if (move_dir.z < 0)
             {
-                Debug.Log("го" + "z : " + move_dir.z.ToString());
+                //Debug.Log("го" + "z : " + move_dir.z.ToString());
                 transform.Rotate(new Vector3(0, 180, 0));
                 transform.position -= P_move * player_speed * Time.deltaTime;
             }
             else if (move_dir.z > 0)
             {
-                Debug.Log("╩С " + "z : " + move_dir.z.ToString());
+                //Debug.Log("╩С " + "z : " + move_dir.z.ToString());
                 transform.position += P_move * player_speed * Time.deltaTime;
             }
-            Debug.Log(player_Attack.ToString());
         }
         //аб©Л
         else
@@ -64,13 +63,13 @@ public class player : MonoBehaviour
             player_Animator.SetFloat("speed", 2f);
             if (move_dir.x < 0)
             {
-                Debug.Log("аб " + "x : " + move_dir.x.ToString());
+                //Debug.Log("аб " + "x : " + move_dir.x.ToString());
                 transform.Rotate(new Vector3(0, -90, 0));
                 transform.position += transform.forward * player_speed * Time.deltaTime;
             }
             else if (move_dir.x > 0)
             {
-                Debug.Log("©Л " + "x : " + move_dir.x.ToString());
+                //Debug.Log("©Л " + "x : " + move_dir.x.ToString());
                 transform.Rotate(new Vector3(0, 90, 0));
                 transform.position += transform.forward * player_speed * Time.deltaTime;
             }
@@ -91,7 +90,7 @@ public class player : MonoBehaviour
         {
             player_Attack = true;
             count++;
-            
+
             if (player_Attack)
             {
                 switch (count)

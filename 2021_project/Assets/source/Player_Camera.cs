@@ -7,7 +7,7 @@ public class Player_Camera : MonoBehaviour
     [SerializeField]
     Transform player;
     [SerializeField]
-    Transform camera_Arm;
+    public Transform camera_Arm;
 
     public float speed;
 
