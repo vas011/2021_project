@@ -543,7 +543,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1070012841}
   box_finish: 0
-  player_Camera: {fileID: 0}
   gameManager_info:
   - map: {fileID: 2817889331639410869}
     waypoint:
@@ -1087,6 +1086,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &1774071032 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2817889331711232437, guid: 1f39e155ebee528488b6b28c006d4cff, type: 3}
+  m_PrefabInstance: {fileID: 2817889331639410868}
+  m_PrefabAsset: {fileID: 0}
+--- !u!208 &1774071037
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774071032}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1810892226 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7854436441588536174, guid: e38c5d9c76b227a4c8b709417fc82d27, type: 3}
@@ -1270,7 +1290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2817889330383543348, guid: 1f39e155ebee528488b6b28c006d4cff, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2817889330383543348, guid: 1f39e155ebee528488b6b28c006d4cff, type: 3}
       propertyPath: m_TagString
@@ -1457,7 +1477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7854436441588536174, guid: e38c5d9c76b227a4c8b709417fc82d27, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e38c5d9c76b227a4c8b709417fc82d27, type: 3}

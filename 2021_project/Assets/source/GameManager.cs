@@ -11,8 +11,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     player player;
     public bool box_finish;
-    [SerializeField]
-    Player_Camera player_Camera;
 
     [SerializeField]
     info[] gameManager_info;
