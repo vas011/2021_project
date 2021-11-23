@@ -10,8 +10,11 @@ public class player : MonoBehaviour
     Transform player_body;
     [SerializeField]
     public Transform camer_arm;
+    [SerializeField]
+    Sound Player_sfx;
 
     GameManager gameManager;
+    public AudioSource Player_sound;
 
     public int player_hp;
     public int player_speed;
@@ -27,8 +30,10 @@ public class player : MonoBehaviour
         player_move = false;
         player_Attack = false;
         player_Animator = GetComponent<Animator>();
+        Player_sound = GetComponent<AudioSource>();
         InvokeRepeating("Attack", 10f, 2f);
     }
+
     void move()
     {
         Vector3 move_dir = Vector3.zero;
@@ -74,6 +79,17 @@ public class player : MonoBehaviour
                 transform.position += transform.forward * player_speed * Time.deltaTime;
             }
         }
+        //esc 키로 일시중지 키 코드 적용
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            //오브젝트가 가지고 있는 함수를 사용하기 위해 아래와 같이 코드 적용
+
+            //게임오브젝트 변수 선언하여 Game_menu 오브젝트 찾아서 변수에 저장
+            GameObject Game_UI = GameObject.Find("Game_menu");
+            //오브젝트가 가지고 있는 스크립트 함수 사용
+            Game_UI.GetComponent<Game_menu>().menu_onoff();
+            Game_UI.GetComponent<Game_menu>().Game_paues();
+        }
     }
 
     void Attack()
@@ -114,7 +130,12 @@ public class player : MonoBehaviour
             Debug.Log(count.ToString());
         }
     }
-
+    
+    void Player_footstep_sound()
+    {
+        Player_sfx.Player_SFX_Play();
+    }
+   
     void Update()
     {
         if (player_Attack != false)

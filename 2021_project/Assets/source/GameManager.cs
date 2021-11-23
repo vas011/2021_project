@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -33,14 +34,17 @@ public class GameManager : MonoBehaviour
         {
             maps.map_setAtive(false);
             map_count++;
-            if (map_count > 5)
+            if (map_count == 5)
             {
-                map_count = 0;
+                SceneManager.LoadScene("Ending");
             }
-            maps = gameManager_info[map_count];
-            maps.map_setAtive(true);
-            player.transform.position = maps.re_start_position.position;
-            box_finish = false;
+            else 
+            {
+                maps = gameManager_info[map_count];
+                maps.map_setAtive(true);
+                player.transform.position = maps.re_start_position.position;
+                box_finish = false;
+            }
         }   
     }
 

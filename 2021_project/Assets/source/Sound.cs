@@ -2,9 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Sound : MonoBehaviour
 {
+    [SerializeField]
+    player player;
+
+    [SerializeField]
+    Scrollbar BG_bar;
+    [SerializeField]
+    Scrollbar SFX_bar;
+
     [SerializeField]
     AudioClip[] BGM_Sound;    
     [SerializeField]
@@ -12,6 +21,8 @@ public class Sound : MonoBehaviour
 
     private AudioSource Play_BGMClip;
     private AudioSource Player_Cilp;
+
+    
 
     void Play_BGM()
     {
@@ -37,8 +48,17 @@ public class Sound : MonoBehaviour
     }
     public void Player_SFX_Play()
     {
-        Player_Cilp.clip = SFX_sound[0];
-        Player_Cilp.Play();
+        player.Player_sound.clip = SFX_sound[0];
+        player.Player_sound.Play();
+    }
+
+    public void Set_BG_Sound()
+    {
+        Play_BGMClip.volume = BG_bar.value;
+    }
+    public void Set_SFX_Sound()
+    {
+        player.Player_sound.volume = SFX_bar.value;
     }
 
     // Start is called before the first frame update

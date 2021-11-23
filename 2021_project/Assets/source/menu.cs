@@ -16,7 +16,10 @@ public class menu : MonoBehaviour
         Application.Quit();
     }
 
-
+    public void lobby_Button()
+    {
+        SceneManager.LoadScene("menu");
+    }
 
     /*
     // Start is called before the first frame update
