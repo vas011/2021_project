@@ -10,8 +10,11 @@ public class Player_Camera : MonoBehaviour
     public Transform camera_Arm;
 
     public float speed;
+    public bool paues_trigger = false;
 
     Vector3 camera_Angle;
+    Vector2 input_mouse;
+
     float x;
     /* 기능 중지
      * 사용할지 안할지 추후 설정*/
@@ -19,9 +22,15 @@ public class Player_Camera : MonoBehaviour
     //카메라 움직임 함수
     void camera_move()
     {
-        //마우스의 좌우 움직임 입력값 받아오기
-        Vector2 input_mouse = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-
+        if (paues_trigger == false)
+        {
+            //마우스의 좌우 움직임 입력값 받아오기
+            input_mouse = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        }
+        else
+        {
+            input_mouse = new Vector2(0,0);
+        }
         /*
         //카메라 좌우 이동 제한 코드
         if (x > 0) // 오른쪽 제한

@@ -9,6 +9,8 @@ public class Game_menu : MonoBehaviour
     [SerializeField]
     GameObject manu_panel;
 
+    GameObject player_camera;
+
     public void menu_onoff()
     {
         
@@ -24,13 +26,16 @@ public class Game_menu : MonoBehaviour
 
     public void Game_paues()
     {
-        if(manu_panel.activeSelf == true)
+        player_camera = GameObject.Find("MainCamera");
+        if (manu_panel.activeSelf == true)
         {
             Time.timeScale = 0;
+            player_camera.GetComponent<Player_Camera>().paues_trigger = true;
         }
         else
         {
             Time.timeScale = 1;
+            player_camera.GetComponent<Player_Camera>().paues_trigger = false;
         }
     }
 
