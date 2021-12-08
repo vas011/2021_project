@@ -16,12 +16,15 @@ public class player : MonoBehaviour
 
     GameManager gameManager;
     public AudioSource Player_sound;
+    GameObject Game_UI;
 
     public int player_hp;
     public int player_speed;
+    public float player_Stamina;
 
     bool player_move;
     bool player_Attack;
+    bool player_run;
 
     float Attack_time;
     int count = 0;
@@ -30,10 +33,12 @@ public class player : MonoBehaviour
     {
         player_move = false;
         player_Attack = false;
+        player_run = false;
         player_Animator = GetComponent<Animator>();
         Player_sound = GetComponent<AudioSource>();
         player_rigidbody = GetComponent<Rigidbody>();
         InvokeRepeating("Attack", 10f, 2f);
+        Game_UI = GameObject.Find("Game_menu");
     }
 
     void move()
@@ -121,10 +126,44 @@ public class player : MonoBehaviour
             //오브젝트가 가지고 있는 함수를 사용하기 위해 아래와 같이 코드 적용
 
             //게임오브젝트 변수 선언하여 Game_menu 오브젝트 찾아서 변수에 저장
-            GameObject Game_UI = GameObject.Find("Game_menu");
             //오브젝트가 가지고 있는 스크립트 함수 사용
             Game_UI.GetComponent<Game_menu>().menu_onoff();
             Game_UI.GetComponent<Game_menu>().Game_paues();
+        }
+
+
+    }
+    void Run()
+    {
+        //쉬프트키 달리기 코드
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            player_run = true;
+            player_speed = player_speed * 2;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            player_run = false;
+            player_speed = 10;
+        }
+        if (player_run == true)
+        {
+            player_Stamina -= 20 * Time.deltaTime;
+            Game_UI.GetComponent<Game_menu>().Stamina_Bar_UI();
+            if (player_Stamina <= 0)
+            {
+                player_Stamina = 0;
+                player_speed = 10;
+            }
+        }
+        else
+        {
+            player_Stamina += 10 * Time.deltaTime;
+            Game_UI.GetComponent<Game_menu>().Stamina_Bar_UI();
+            if (player_Stamina >= 100)
+            {
+                player_Stamina = 100;
+            }
         }
     }
 
@@ -180,5 +219,6 @@ public class player : MonoBehaviour
         }
         move();
         Attack();
+        Run();
     }
 }
