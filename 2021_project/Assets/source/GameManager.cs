@@ -20,16 +20,29 @@ public class GameManager : MonoBehaviour
 
     int map_count = 0;
 
+    //마우스 커서 보이기 온오프
+    public void cursor_onoff(bool onoff)
+    {
+        if (onoff)
+        {
+            Cursor.visible = onoff;
+        }
+        else
+        {
+            Cursor.visible = onoff;
+        }
+    }
+
     void Start()
     {
         box_finish = false;
+        Cursor.visible = false; // 마우스 커서 안보이게
         maps = gameManager_info[map_count];
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (box_finish)
         {
             maps.map_setAtive(false);
@@ -45,7 +58,7 @@ public class GameManager : MonoBehaviour
                 player.transform.position = maps.re_start_position.position;
                 box_finish = false;
             }
-        }   
+        }
     }
 
     [System.Serializable]

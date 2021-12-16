@@ -14,6 +14,7 @@ public class Monster : MonoBehaviour
     public float hp;
     public float attack_speed;
     public float attack_range;
+    public float Attack_damage;
     [Space(10f)]
 
     //레이마스크 설정 변수
@@ -105,7 +106,7 @@ public class Monster : MonoBehaviour
     void player_Attack()
     {
         Vector3 dirToTarget = (Ptarget.position - transform.position).normalized;
-        Vector3 targetPosition = Ptarget.position - dirToTarget * (monster_collider + player_collider + attack_range / 2f);
+        Vector3 targetPosition = Ptarget.position - dirToTarget * (monster_collider + player_collider + attack_range / 2.5f);
         if (fiend_player == true)
         {
             navi_Agent.destination = targetPosition;
@@ -125,7 +126,16 @@ public class Monster : MonoBehaviour
     //공격 이벤트 발생 함수
     void Attack_Action()
     {
-        //Debug.Log("공격이벤트 발생!!");
+        player_info.Player_Damage(Attack_damage);
+//      Debug.Log("공격이벤트 발생!!");
+    }
+    public void Monster_Damage(float Damage)
+    {
+        if(hp <= 0)
+        {
+            hp = 0;
+        }
+        hp = hp - Damage;
     }
 
     private void Awake()
@@ -133,6 +143,11 @@ public class Monster : MonoBehaviour
         navi_Agent = GetComponent<NavMeshAgent>();
         monster_Ani = GetComponent<Animator>();
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
     }
 
     // Start is called before the first frame update

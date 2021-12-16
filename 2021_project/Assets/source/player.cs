@@ -17,10 +17,12 @@ public class player : MonoBehaviour
     GameManager gameManager;
     public AudioSource Player_sound;
     GameObject Game_UI;
+    GameObject monster;
 
     public int player_hp;
     public int player_speed;
     public float player_Stamina;
+    public float player_Attack_Damage;
 
     bool player_move;
     bool player_Attack;
@@ -28,6 +30,7 @@ public class player : MonoBehaviour
 
     float Attack_time;
     int count = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,10 +42,12 @@ public class player : MonoBehaviour
         player_rigidbody = GetComponent<Rigidbody>();
         InvokeRepeating("Attack", 10f, 2f);
         Game_UI = GameObject.Find("Game_menu");
+        monster = GameObject.Find("Monster");
     }
 
     void move()
     {
+        #region 딱딱한 움직임 코드( 주석 처리 함 )
         //Vector3 move_dir = Vector3.zero;        
         //move_dir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         //Vector3 P_move = transform.forward = camer_arm.forward;
@@ -92,6 +97,8 @@ public class player : MonoBehaviour
         }
 
         /**/
+        #endregion
+
 
         /* 부드러운 플레이어 움직임 코드 블록 */
 
@@ -133,10 +140,10 @@ public class player : MonoBehaviour
 
 
     }
-    void Run()
+    void Run(bool player_move)
     {
         //쉬프트키 달리기 코드
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && player_move)
         {
             player_run = true;
             player_speed = player_speed * 2;
@@ -177,6 +184,9 @@ public class player : MonoBehaviour
             //Debug.Log(Attack_time.ToString());
             player_Attack = false;
         }
+        else
+        {
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             player_Attack = true;
@@ -202,10 +212,29 @@ public class player : MonoBehaviour
                         break;
                 }
             }
-            Debug.Log(count.ToString());
+            //Debug.Log(count.ToString());
+        }
+    }
+    void Player_Attak_Action()
+    {   
+        monster.GetComponent<Monster>().Monster_Damage(player_Attack_Damage);
+        //Debug.Log("플레이어_공격이벤트");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag.ToString() == "Monster")
+        {
+            Player_Attak_Action();
+            Debug.Log("몬스터 공격!");
         }
     }
 
+    public void Player_Damage(float Damage)
+    {
+        player_hp = player_hp - ((int)Damage);
+        Game_UI.GetComponent<Game_menu>().HP_Bar_UI();
+    }
     void Player_footstep_sound()
     {
         Player_sfx.Player_SFX_Play();
@@ -219,6 +248,7 @@ public class player : MonoBehaviour
         }
         move();
         Attack();
-        Run();
+        Run(player_move);
     }
+
 }

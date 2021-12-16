@@ -9,6 +9,7 @@ TagManager:
   - Map_3
   - Map_4
   - Map_5
+  - Monster
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Water
   - UI
   - player
-  - 
+  - Monster
   - 
   - 
   - 
