@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,10 +12,14 @@ public class GameManager : MonoBehaviour
     /**/
     [SerializeField]
     player player;
+    [SerializeField]
+    Renderer minimap_image;
     public bool box_finish;
 
     [SerializeField]
     info[] gameManager_info;
+
+   
 
     info maps;
 
@@ -56,6 +61,7 @@ public class GameManager : MonoBehaviour
                 maps = gameManager_info[map_count];
                 maps.map_setAtive(true);
                 player.transform.position = maps.re_start_position.position;
+                minimap_image.material = gameManager_info[map_count].minimap_setAtive();
                 box_finish = false;
             }
         }
@@ -71,10 +77,16 @@ public class GameManager : MonoBehaviour
         Transform[] waypoint;
         [SerializeField]
         public Transform re_start_position;
+        [SerializeField]
+        Material minimap;
 
         public void map_setAtive(bool atcive)
         {
             map.SetActive(atcive);
+        }
+        public Material minimap_setAtive()
+        {
+            return minimap;
         }
     }
 }
