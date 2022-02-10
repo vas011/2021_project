@@ -87,6 +87,8 @@ public class Game_menu : MonoBehaviour
 
     public void Exit_button()
     {
+        Time.timeScale = 1;
+        mouse_cursor_hide.GetComponent<GameManager>().cursor_onoff(false);
         SceneManager.LoadScene("menu");
     }
 }
