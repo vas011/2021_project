@@ -11,6 +11,8 @@ public class Game_menu : MonoBehaviour
 
     [SerializeField]
     GameObject manu_panel;
+    [SerializeField]
+    GameObject Game_Over_Panel;
 
     [SerializeField]
     Image HP_Bar;
@@ -18,14 +20,17 @@ public class Game_menu : MonoBehaviour
     Image Stamina_Bar;
     [SerializeField]
     Image finish_direction;
+    
 
     GameObject player_camera;
     GameObject mouse_cursor_hide;
+    GameObject google_Ads;
 
     private void Start()
     {
         player_camera = GameObject.Find("MainCamera");
         mouse_cursor_hide = GameObject.Find("GameManager");
+        google_Ads = GameObject.Find("Google_Ads");
     }
     private void Update()
     {
@@ -85,10 +90,18 @@ public class Game_menu : MonoBehaviour
         }
     }
 
+    public void Continue_buuton()
+    {
+        Game_Over_Panel.SetActive(false);
+        google_Ads.GetComponent<Goolge_Ads>().AdStart();
+    }
+
     public void Exit_button()
     {
         Time.timeScale = 1;
         mouse_cursor_hide.GetComponent<GameManager>().cursor_onoff(false);
         SceneManager.LoadScene("menu");
+        Cursor.visible = true;
     }
+
 }

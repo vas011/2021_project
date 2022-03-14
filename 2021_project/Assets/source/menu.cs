@@ -10,6 +10,7 @@ public class menu : MonoBehaviour
     public void menu_startButton()
     {
         SceneManager.LoadScene("SampleScene");
+        Cursor.visible = false;
     }
     public void menu_exitButton()
     {
@@ -19,6 +20,7 @@ public class menu : MonoBehaviour
     public void lobby_Button()
     {
         SceneManager.LoadScene("menu");
+        Cursor.visible = true;
     }
 
     /*

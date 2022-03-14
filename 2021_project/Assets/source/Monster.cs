@@ -8,7 +8,7 @@ public class Monster : MonoBehaviour
     NavMeshAgent navi_Agent;
     Animator monster_Ani;
     Transform Ptarget;
-    player player_info;
+    GameObject player_info;
     //몬스터 스탯
     [Header("Stats")]
     public float hp;
@@ -115,6 +115,7 @@ public class Monster : MonoBehaviour
         {
             monster_Ani.SetBool("Run" , false);
             monster_Ani.SetBool("Attack01", true);
+            Attack_Action();
         }
         else if(navi_Agent.destination != targetPosition)
         {
@@ -126,7 +127,7 @@ public class Monster : MonoBehaviour
     //공격 이벤트 발생 함수
     void Attack_Action()
     {
-        player_info.Player_Damage(Attack_damage);
+        player_info.GetComponent<player>().Player_Damage(Attack_damage);
 //      Debug.Log("공격이벤트 발생!!");
     }
     public void Monster_Damage(float Damage)
@@ -134,8 +135,21 @@ public class Monster : MonoBehaviour
         if(hp <= 0)
         {
             hp = 0;
+            die(hp);
         }
         hp = hp - Damage;
+    }
+
+    void die(float Monster_HP)
+    {
+        float HP = Monster_HP;
+        if(HP == 0)
+        {
+            GameObject Ative_Monster = GameObject.Find("Monster");
+            navi_Agent.speed = 0;
+            monster_Ani.SetTrigger("Dead");
+            Destroy(Ative_Monster,3f);
+        }
     }
 
     private void Awake()
@@ -147,7 +161,7 @@ public class Monster : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+
     }
 
     // Start is called before the first frame update
@@ -157,7 +171,7 @@ public class Monster : MonoBehaviour
         monster_collider = GetComponent<CapsuleCollider>().radius;
         player_collider = Ptarget.GetComponent<CapsuleCollider>().radius;   
         InvokeRepeating("monster_move", 2f, 5f);
-        player_info = GetComponent<player>();
+        player_info = GameObject.Find("Player");
     }
 
     // Update is called once per frame

@@ -19,8 +19,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     info[] gameManager_info;
 
-   
-
     info maps;
 
     int map_count = 0;
@@ -28,7 +26,7 @@ public class GameManager : MonoBehaviour
     //마우스 커서 보이기 온오프
     public void cursor_onoff(bool onoff)
     {
-        if (onoff)
+        if (Cursor.visible == false)
         {
             Cursor.visible = onoff;
         }

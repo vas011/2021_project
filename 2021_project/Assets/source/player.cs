@@ -198,12 +198,14 @@ public class player : MonoBehaviour
                 {
                     case 1:
                         player_Animator.SetTrigger("Attack1");
+                         Player_Attak_Action();
                         break;
 
                     case 2:
                         if (player_Attack == true)
                         {
                             player_Animator.SetTrigger("Attack2");
+                            Player_Attak_Action();
                         }
                         break;
                     default:
@@ -217,8 +219,11 @@ public class player : MonoBehaviour
     }
     void Player_Attak_Action()
     {   
-        monster.GetComponent<Monster>().Monster_Damage(player_Attack_Damage);
-        //Debug.Log("플레이어_공격이벤트");
+        if(monster != null)
+        {
+            monster.GetComponent<Monster>().Monster_Damage(player_Attack_Damage);
+            Debug.Log("플레이어_공격이벤트");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -229,11 +234,21 @@ public class player : MonoBehaviour
             Debug.Log("몬스터 공격!");
         }
     }
-
     public void Player_Damage(float Damage)
     {
         player_hp = player_hp - ((int)Damage);
         Game_UI.GetComponent<Game_menu>().HP_Bar_UI();
+        die(player_hp);
+    }
+    void die(float player_hp)
+    {
+        if (player_hp <= 0)
+        {
+            player_Animator.SetBool("Death", true);
+            
+            Cursor.visible = true;
+        }
+
     }
     void Player_footstep_sound()
     {
@@ -250,5 +265,4 @@ public class player : MonoBehaviour
         Attack();
         Run(player_move);
     }
-
 }
