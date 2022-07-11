@@ -23,6 +23,15 @@ public class GameManager : MonoBehaviour
 
     int map_count = 0;
 
+    public void Game_ReStart()
+    {
+        player.player_die = false;
+        player.player_hp = 100;
+        GameObject Game_UI = GameObject.Find("Game_menu");
+        Game_UI.GetComponent<Game_menu>().HP_Bar_UI();
+        player.player_Animator.SetBool("Death", false);
+    }
+
     //마우스 커서 보이기 온오프
     public void cursor_onoff(bool onoff)
     {

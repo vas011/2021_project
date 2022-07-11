@@ -5,7 +5,7 @@ using UnityEngine;
 public class player : MonoBehaviour
 {
 
-    Animator player_Animator;
+    public Animator player_Animator;
     Rigidbody player_rigidbody;
     [SerializeField]
     Transform player_body;
@@ -27,6 +27,8 @@ public class player : MonoBehaviour
     bool player_move;
     bool player_Attack;
     bool player_run;
+    public bool player_die;
+    bool monster_chack;
 
     float Attack_time;
     int count = 0;
@@ -37,6 +39,7 @@ public class player : MonoBehaviour
         player_move = false;
         player_Attack = false;
         player_run = false;
+        player_die = false;
         player_Animator = GetComponent<Animator>();
         Player_sound = GetComponent<AudioSource>();
         player_rigidbody = GetComponent<Rigidbody>();
@@ -104,7 +107,7 @@ public class player : MonoBehaviour
 
         Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        if (moveInput.magnitude == 0)
+        if (moveInput.magnitude == 0 || player_die == true)
         {
             player_move = false;
             player_Animator.SetFloat("speed", 0f);
@@ -197,41 +200,41 @@ public class player : MonoBehaviour
                 switch (count)
                 {
                     case 1:
-                        player_Animator.SetTrigger("Attack1");
-                         Player_Attak_Action();
+                            player_Animator.SetTrigger("Attack1");
+                            Player_Attak_Action();
                         break;
 
                     case 2:
                         if (player_Attack == true)
                         {
-                            player_Animator.SetTrigger("Attack2");
-                            Player_Attak_Action();
+                           player_Animator.SetTrigger("Attack2");
+                           Player_Attak_Action();
                         }
                         break;
+                        
                     default:
                         count = 0;
                         player_Attack = false;
                         break;
                 }
             }
-            //Debug.Log(count.ToString());
         }
     }
     void Player_Attak_Action()
     {   
-        if(monster != null)
+        if(monster != null && monster_chack)
         {
+            Debug.Log("공격!");
             monster.GetComponent<Monster>().Monster_Damage(player_Attack_Damage);
-            Debug.Log("플레이어_공격이벤트");
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag.ToString() == "Monster")
+        if (other.gameObject.tag == "Monster")
         {
-            Player_Attak_Action();
-            Debug.Log("몬스터 공격!");
+            monster_chack = true;
+            Debug.Log("몬스터 충돌 확인");
         }
     }
     public void Player_Damage(float Damage)
@@ -245,8 +248,9 @@ public class player : MonoBehaviour
         if (player_hp <= 0)
         {
             player_Animator.SetBool("Death", true);
-            
+            player_die = true;
             Cursor.visible = true;
+            Game_UI.GetComponent<Game_menu>().Game_Over();
         }
 
     }

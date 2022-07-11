@@ -19,8 +19,8 @@ public class menu : MonoBehaviour
 
     public void lobby_Button()
     {
-        SceneManager.LoadScene("menu");
-        Cursor.visible = true;
+        SceneManager.LoadScene("Lobby");
+        //Cursor.visible = true;
     }
 
     /*

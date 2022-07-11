@@ -9,13 +9,16 @@ public class Monster : MonoBehaviour
     Animator monster_Ani;
     Transform Ptarget;
     GameObject player_info;
+
+    bool isDead;
+
     //몬스터 스탯
     [Header("Stats")]
     public float hp;
     public float attack_speed;
     public float attack_range;
     public float Attack_damage;
-    [Space(10f)]
+    [Space(20f)]
 
     //레이마스크 설정 변수
     [SerializeField]
@@ -31,6 +34,10 @@ public class Monster : MonoBehaviour
     //웨이포인트 배열 변수
     [SerializeField]
     Transform[] move_point;
+    //무기 콜라이더
+    [Header("weapon")]
+    [SerializeField]
+    Collider weapon_L;
 
     //웨이포인트 카운트
     int count = 0;
@@ -66,7 +73,7 @@ public class Monster : MonoBehaviour
         //현재 위치 와 지정한 거리 , 플레이어_레이어 마스크 조건으로 플레이어를 찾아 Collider 배열에 저장
         Collider[] colls = Physics.OverlapSphere(transform.position, distancec, player_Layermak);
         //1개 이상이 나올경우 조건문 실행
-        if (colls.Length > 0)
+        if (colls.Length > 0 )
         {
             //플레이어 위치 저장
             Transform target_player = colls[0].transform;
@@ -79,7 +86,8 @@ public class Monster : MonoBehaviour
             {
                 if (Physics.Raycast(transform.position, traget_direction, out RaycastHit hit, distancec))
                 {
-                    if (hit.transform.name == "Player")
+                    //플레이어 사정거리가 들어오고 죽지 않았다면 공격 실행
+                    if (hit.transform.name == "Player" && player_info.GetComponent<player>().player_die != true)
                     {
                         
                         fiend_player = true;
@@ -99,6 +107,7 @@ public class Monster : MonoBehaviour
         {
             monster_Ani.SetBool("Attack01", false);
             InvokeRepeating("monster_move", 1f, 5f);
+            fiend_player = false;
         }
         //눈에 보이게 광선의 방향 및 길이 그리기
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * distancec, Color.red);
@@ -115,7 +124,7 @@ public class Monster : MonoBehaviour
         {
             monster_Ani.SetBool("Run" , false);
             monster_Ani.SetBool("Attack01", true);
-            Attack_Action();
+            //Attack_Action();
         }
         else if(navi_Agent.destination != targetPosition)
         {
@@ -127,14 +136,18 @@ public class Monster : MonoBehaviour
     //공격 이벤트 발생 함수
     void Attack_Action()
     {
-        player_info.GetComponent<player>().Player_Damage(Attack_damage);
-//      Debug.Log("공격이벤트 발생!!");
+        if(fiend_player == true)
+        {
+            player_info.GetComponent<player>().Player_Damage(Attack_damage);
+        }
+        //Debug.Log("공격이벤트 발생!!");
     }
     public void Monster_Damage(float Damage)
     {
-        if(hp <= 0)
+        if(hp <= 0 && isDead == false)
         {
             hp = 0;
+            isDead = true;
             die(hp);
         }
         hp = hp - Damage;
@@ -143,7 +156,7 @@ public class Monster : MonoBehaviour
     void die(float Monster_HP)
     {
         float HP = Monster_HP;
-        if(HP == 0)
+        if (HP == 0)
         {
             GameObject Ative_Monster = GameObject.Find("Monster");
             navi_Agent.speed = 0;
@@ -159,11 +172,6 @@ public class Monster : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -172,6 +180,7 @@ public class Monster : MonoBehaviour
         player_collider = Ptarget.GetComponent<CapsuleCollider>().radius;   
         InvokeRepeating("monster_move", 2f, 5f);
         player_info = GameObject.Find("Player");
+        isDead = false;
     }
 
     // Update is called once per frame
