@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Monster : MonoBehaviour
 {
@@ -47,6 +48,23 @@ public class Monster : MonoBehaviour
     float monster_collider;
     float player_collider;
     //몬스터 웨이포인트 이동 함수
+
+    //HUD
+    public GameObject hpBarPrefab;
+    public Vector3 hpBarOffset = new Vector3(0, 2.2f, 0);
+    private Canvas hpBarCanver;
+    private Image hpBarImage;
+
+    void SetHpBar()
+    {
+        hpBarCanver = GameObject.Find("MonsterHPCanvas").GetComponent<Canvas>();
+        GameObject hpBar = Instantiate<GameObject>(hpBarPrefab, hpBarCanver.transform);
+        hpBarImage = hpBar.GetComponentsInChildren<Image>()[1];
+
+        var _hpBar = hpBar.GetComponent<Monste_HP_Bar>();
+        _hpBar.Target_transform = this.gameObject.transform;
+        _hpBar.offset = hpBarOffset;
+    }
 
     void monster_move()
     {
@@ -181,6 +199,8 @@ public class Monster : MonoBehaviour
         InvokeRepeating("monster_move", 2f, 5f);
         player_info = GameObject.Find("Player");
         isDead = false;
+
+        SetHpBar();
     }
 
     // Update is called once per frame
