@@ -14,7 +14,7 @@ public class player : MonoBehaviour
     [SerializeField]
     Sound Player_sfx;
 
-    GameManager gameManager;
+    ParticleManager particleManager;
     public AudioSource Player_sound;
     GameObject Game_UI;
     GameObject monster;
@@ -226,6 +226,7 @@ public class player : MonoBehaviour
         {
             Debug.Log("АјАн!");
             monster.GetComponent<Monster>().Monster_Damage(player_Attack_Damage);
+            ParticleManager.Nomal_Hit();
         }
     }
 
