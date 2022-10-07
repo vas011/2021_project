@@ -157,6 +157,7 @@ public class Monster : MonoBehaviour
         if(fiend_player == true)
         {
             player_info.GetComponent<player>().Player_Damage(Attack_damage);
+            ParticleManager.Monster_Particle();
         }
         //Debug.Log("공격이벤트 발생!!");
     }
@@ -177,9 +178,11 @@ public class Monster : MonoBehaviour
         if (HP == 0)
         {
             GameObject Ative_Monster = GameObject.Find("Monster");
+            GameObject Monter_HP_bar = GameObject.Find("Monster_HP_Bar_BG(Clone)");
             navi_Agent.speed = 0;
             monster_Ani.SetTrigger("Dead");
             Destroy(Ative_Monster,3f);
+            Destroy(Monter_HP_bar);
         }
     }
 

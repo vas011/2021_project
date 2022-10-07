@@ -14,7 +14,6 @@ public class player : MonoBehaviour
     [SerializeField]
     Sound Player_sfx;
 
-    ParticleManager particleManager;
     public AudioSource Player_sound;
     GameObject Game_UI;
     GameObject monster;
@@ -201,14 +200,14 @@ public class player : MonoBehaviour
                 {
                     case 1:
                             player_Animator.SetTrigger("Attack1");
-                            Player_Attak_Action();
+                            //Player_Attak_Action();
                         break;
 
                     case 2:
                         if (player_Attack == true)
                         {
                            player_Animator.SetTrigger("Attack2");
-                           Player_Attak_Action();
+                           //Player_Attak_Action();
                         }
                         break;
                         
@@ -226,7 +225,7 @@ public class player : MonoBehaviour
         {
             Debug.Log("АјАн!");
             monster.GetComponent<Monster>().Monster_Damage(player_Attack_Damage);
-            ParticleManager.Nomal_Hit();
+            ParticleManager.Player_Hit(count);
         }
     }
 

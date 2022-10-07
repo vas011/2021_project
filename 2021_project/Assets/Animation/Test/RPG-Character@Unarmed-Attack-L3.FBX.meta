@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1315bcd7509173f44bc6655b2673dd4d
+guid: 86a0f577ca979dd48a38b737ef4cb885
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -410,14 +410,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.46355686
-        functionName: Player_Attak_Action
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 4e453cc35c27ecf4a8b18f507f839ac4, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {fileID: 101100000, guid: 3e4e408fdcc93ee468a1275b69104d63, type: 2}
