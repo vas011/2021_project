@@ -10,6 +10,7 @@ TagManager:
   - Map_4
   - Map_5
   - Monster
+  - item_Box
   layers:
   - Default
   - TransparentFX

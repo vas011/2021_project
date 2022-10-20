@@ -236,6 +236,11 @@ public class player : MonoBehaviour
             monster_chack = true;
             Debug.Log("몬스터 충돌 확인");
         }
+        else if(other.gameObject.tag == "item_Box")
+        {
+            item_Box.Box_Action();
+            Debug.Log("아이템 박스 충돌");
+        }
     }
     public void Player_Damage(float Damage)
     {
